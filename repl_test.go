@@ -19,8 +19,8 @@ func TestCleanInput(t *testing.T) {
 
 	for _, c := range cases {
 		actual := cleanInput(c.input)
-		if len(c.input) != len(c.expected) {
-			t.Errorf("expecten length of actual doesn't match input")
+		if len(actual) != len(c.expected) {
+			t.Errorf("expecten length of %d actual doesn't match input %d", len(actual), len(c.expected))
 		}
 
 		for i := range actual {
@@ -28,7 +28,7 @@ func TestCleanInput(t *testing.T) {
 			expected := c.expected[i]
 
 			if word != expected {
-				t.Errorf("word %d doesn't match", i)
+				t.Errorf("word %d:%s doesn't match %s", i, word, expected)
 			}
 		}
 	}
