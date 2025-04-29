@@ -10,11 +10,17 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(*config) error
+}
+
+type config struct {
+	next     string
+	previous string
 }
 
 func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
+	conf := config{}
 
 	for {
 		fmt.Printf("Pokedex > ")
@@ -35,7 +41,7 @@ func startRepl() {
 			continue
 		}
 
-		if err := command.callback(); err != nil {
+		if err := command.callback(&conf); err != nil {
 			fmt.Println(err)
 		}
 	}
@@ -55,8 +61,13 @@ func getCommands() map[string]cliCommand {
 		},
 		"map": {
 			name:        "map",
-			description: "Displays the names of location areas",
+			description: "Displays the names of the next location areas",
 			callback:    commandMap,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "Displays the names of the previous location areas",
+			callback:    commandMapB,
 		},
 	}
 }
