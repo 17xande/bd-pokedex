@@ -1,6 +1,6 @@
 package pokeapi
 
-type RespEncounter struct {
+type Location struct {
 	EncounterMethodRates []struct {
 		EncounterMethod struct {
 			Name string `json:"name"`

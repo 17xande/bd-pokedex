@@ -1,14 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
-func commandExplore(cfg *config, args []string) error {
-	if len(args) == 0 {
-		return fmt.Errorf("no location provided")
+func commandExplore(cfg *config, args ...string) error {
+	if len(args) != 1 {
+		return errors.New("you must provide a location name")
 	}
 
 	location := args[0]
-	exploreRes, err := cfg.pokeapiClient.Explore(location)
+	exploreRes, err := cfg.pokeapiClient.GetLocation(location)
 	if err != nil {
 		return err
 	}
