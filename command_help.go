@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func commandHelp(conf *config) error {
+func commandHelp(conf *config, args []string) error {
 	text := `Welcome to the Pokedex!
 Usage:
 
